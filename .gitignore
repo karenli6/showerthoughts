@@ -1,8 +1,5 @@
 # local versions of packages + repos
-dev/d3-lib*
-dev/ultra*
-dev/react-force-graph
-dev/neo4j-3d-force-graph
+dev/external/*
 
 # local dev files
 node_modules/
