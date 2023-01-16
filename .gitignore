@@ -1,5 +1,9 @@
-# local dev files
-env/
+# local versions of packages + repos
 dev/d3-lib*
-dev/ultraleap*
-dev/react-force-graph*
+dev/ultra*
+dev/react-force-graph
+dev/neo4j-3d-force-graph
+
+# local dev files
+node_modules/
+build/
