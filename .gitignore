@@ -1,2 +1,5 @@
 # local dev files
 env/
+dev/d3-lib*
+dev/ultraleap*
+dev/react-force-graph*
