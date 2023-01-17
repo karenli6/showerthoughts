@@ -14,12 +14,12 @@ after dependencies are added, the app can be run anytime via the following:
 
 softly in order of importance:
 
-1. add `onHover` property to nodes: show group number (JSON `group`) + topic label (JSON `id`)
-2. add color to nodes according to group number
-3. color graph edges (somehow...)
-4. add form for adding new thoughts at runtime (contained in React component `showerthoughts/text_processing/templates/render_form.js`)
-5. add styling (bootstrap.css?)
+- add `onHover` property to nodes: show group number (JSON `group`) + topic label (JSON `id`)
+- add color to nodes according to group number
+- color graph edges (somehow...)
+- add form for adding new thoughts at runtime (contained in React component `showerthoughts/text_processing/templates/render_form.js`)
+- add styling (bootstrap.css?)
 
 other:
 
-1. software licensing? NPM package is currently "ISC" (npm default)
+- software licensing? NPM package is currently "ISC" (npm default)

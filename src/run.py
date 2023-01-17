@@ -1,3 +1,3 @@
-from templates import flaskapp
+from templates import app
 
-flaskapp.run()
+app.run()
