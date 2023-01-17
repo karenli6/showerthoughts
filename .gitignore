@@ -4,5 +4,6 @@ dev/external/*
 # local dev files
 node_modules/
 build/
+pyenv/
 
 __pycache__/

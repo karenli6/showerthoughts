@@ -1,13 +1,18 @@
 import React from 'react';
-import ForceGraph2D from 'react-force-graph-2d';
+import ForceGraph3D from 'react-force-graph-3d';
 
-const random_data = require("./random-data.js");
+import * as jsonFile from "./data.json";
+
+labels = (node) => {
+    console.log(node);
+    return `(${node.group}) ${node.id}`;
+}
 
 function App() {
     return(
         <div id="root">
             <h1>[ DEV ]</h1>
-            <ForceGraph2D graphData={ random_data.genRandomTree() }/>
+            <ForceGraph3D graphData={ jsonFile } nodeLabel={ labels } />
         </div>
     );
 }

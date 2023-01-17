@@ -1,3 +1,5 @@
+// via {https://github.com/vasturiano/react-force-graph}/example/datasets/random-data.js
+
 export function genRandomTree(N = 300, reverse = false) {
   return {
     nodes: [...Array(N).keys()].map(i => ({ id: i })),

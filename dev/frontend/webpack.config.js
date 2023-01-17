@@ -33,6 +33,7 @@ module.exports = {
     devServer : {
         static : './build',
         port : 9001,
+        hot : true,
     },
     output : {
         path : path.resolve(__dirname, 'build'),
