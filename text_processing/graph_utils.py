@@ -2,10 +2,7 @@
 # --> re cluster if the node is too large
 import csv
 from csv import writer
-
 import numpy as np
-# import pandas as pd
-# from pandas import read_csv
 
 # to prevent against openmp issue
 import os
@@ -199,9 +196,7 @@ def create_graph():
 
   for k in GRAPH.keys():
     GRAPH[k] = list(GRAPH[k])
-    # if len(GRAPH[k]) > max_children:
-      # max_children = len(GRAPH[k]) 
-      # max_child_topic = k
+
     SIZES[k] = factor * SIZES[k]
 
 
@@ -225,16 +220,17 @@ def create_graph():
   return GRAPH, SIZES, root_topics
 
 
-####### separate function to append to csv
+## function to write to csv file
 def append_to_csv(showerthought):
   # List that we want to add as a new row
   rowlist = [1,'N/A','N/A', 1, 'N/A',1,'N/A','N/A', 'N/A', showerthought,'N/A' ]
   
   # Open our existing CSV file in append mode
-  # Create a file object for this file
-  with open('event.csv', 'a') as f_object:
+
+  # with open('event.csv', 'a') as f_object:
+  with open('shower_thoughts.csv', 'a') as f_object:  
       writer_object = writer(f_object)
       writer_object.writerow(rowlist)
   
       f_object.close()
-  print("successfully appended")
+  return True

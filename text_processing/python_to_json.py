@@ -5,7 +5,7 @@ def graph_to_js(GRAPH, SIZES, ROOTS):
   print('graph to d3:')
   print('sizes:', SIZES)
 
-  D3_obj = {
+  neo4j_obj = {
     "nodes": [], 
     "links": [],
   }
@@ -15,7 +15,7 @@ def graph_to_js(GRAPH, SIZES, ROOTS):
 
   def bfs(group, graph, node):
     if node not in visited:
-      D3_obj["nodes"].append({"id": node, "group": group, "size": SIZES[node]})
+      neo4j_obj["nodes"].append({"id": node, "color_label": group, "size": SIZES[node]})
       visited.append(node) 
       queue.append(node) 
 
@@ -25,22 +25,22 @@ def graph_to_js(GRAPH, SIZES, ROOTS):
         for child in graph[s]:
           if child not in visited:
             visited.append(child)
-            D3_obj["nodes"].append({"id": child, "group": group,"size": SIZES[child]})
+            neo4j_obj["nodes"].append({"id": child, "group": group,"size": SIZES[child]})
 
             # create link between node and neighbor
-            D3_obj["links"].append({"source": s, "target": child, "value": 10})
+            neo4j_obj["links"].append({"source": s, "target": child, "value": 10})
 
             queue.append(child)
 
 
-  group = 1
+  color_label = 1
   for root in ROOTS:
-    bfs(group, GRAPH, root)
-    group +=1
+    bfs(color_label, GRAPH, root)
+    color_label +=1
 
-  y = json.dumps(D3_obj)
+  y = json.dumps(neo4j_obj)
 
-  with open("D3_graph_input.json", "w") as outfile:
+  with open("js_graph.json", "w") as outfile:
       outfile.write(y)
   
   return True
