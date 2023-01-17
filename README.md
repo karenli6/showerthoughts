@@ -1,5 +1,10 @@
 
 # showerthoughts
+
+Shower thoughts: a sudden idea that occurs to a person during an unconnected mundane activity.  a.k.a. the most interesting expressions of our creativity and randomness.
+
+The inclusion of gesture controls is intended to make the audience’s interaction with others’ thoughts more concrete. Being able to affect the display of concepts with bodily gestures helps bridge the gap between the mental and the physical.
+
 WIP: currently testing 3 different methods of graph generation in these files: 
 1. graph_generator_v1
 2. graph_generator_v2
