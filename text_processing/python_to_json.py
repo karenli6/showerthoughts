@@ -1,7 +1,7 @@
 # convert node graph to D3 viz
 import json
 
-def graph_to_d3(GRAPH, SIZES, ROOTS):
+def graph_to_js(GRAPH, SIZES, ROOTS):
   print('graph to d3:')
   print('sizes:', SIZES)
 

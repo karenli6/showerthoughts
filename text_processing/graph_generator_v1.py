@@ -1,6 +1,8 @@
 # pipeline: clean each text and reduce to main words --> Perform kmeans clustering on list of phrases
 # --> re cluster if the node is too large
 import csv
+from csv import writer
+
 import numpy as np
 # import pandas as pd
 # from pandas import read_csv
@@ -223,3 +225,16 @@ def create_graph():
   return GRAPH, SIZES, root_topics
 
 
+####### separate function to append to csv
+def append_to_csv(showerthought):
+  # List that we want to add as a new row
+  rowlist = [1,'N/A','N/A', 1, 'N/A',1,'N/A','N/A', 'N/A', showerthought,'N/A' ]
+  
+  # Open our existing CSV file in append mode
+  # Create a file object for this file
+  with open('event.csv', 'a') as f_object:
+      writer_object = writer(f_object)
+      writer_object.writerow(rowlist)
+  
+      f_object.close()
+  print("successfully appended")
