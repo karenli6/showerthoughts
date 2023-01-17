@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, render_template
-from utils import extract_key_terms, write_file
+# from utils import extract_key_terms, write_file
 import os
 import sys
 sys.path.append('..')
@@ -17,9 +17,10 @@ def index():
 @app.route('/process', methods=['GET', 'POST'])
 def process():
     # POST request
+    print(request)
     assert request.method == 'POST'
 
-    text = request.form['showerthought']
+    text = request.form['user_input']
     # append to existing csv file
     append_to_csv(text)
     print("SUCCESSSS")
