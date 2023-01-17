@@ -1,5 +1,6 @@
+# local versions of packages + repos
+dev/external/*
+
 # local dev files
-env/
-dev/d3-lib*
-dev/ultraleap*
-dev/react-force-graph*
+node_modules/
+build/
