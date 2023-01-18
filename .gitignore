@@ -8,3 +8,4 @@ pyenv/
 
 __pycache__/
 bundle.js
+package-lock.json
