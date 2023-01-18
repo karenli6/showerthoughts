@@ -23,3 +23,5 @@ WIP: currently testing 3 different methods of graph generation in these files:
 Direct contributors: @crifork3, @karenli6
 References, resources, and inspiration: @cynthia9chen, (project) [lotus](https://github.com/karenli6/lotus)
 https://github.com/vasturiano/react-force-graph
+
+metalab @ Harvard Advisor: Dr. des. Kim Frederic Albrecht, Principal Investigator metaLAB (at) Harvard & FU Berlin
