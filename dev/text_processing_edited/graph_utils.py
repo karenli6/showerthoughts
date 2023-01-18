@@ -38,7 +38,7 @@ embedder = SentenceTransformer('all-MiniLM-L6-v2')
 SIZES = {}
 
 #################################################
-## HELPER FUNCTIONS
+## TEXT CLEANING HELPER FUNCTIONS
 
 # NLP functions for cleaning text
 def remove_punctuation(input):
@@ -93,74 +93,129 @@ def clean_text(text):
     text_no_doublespace = re.sub('\s+', ' ', text_nopunct).strip()
     return text_no_doublespace
 
+#############
 # Perform kmeans clustering on list of phrases
 # need to specify number of clusters wanted (k)
-def generate_clusters(num_clusters, phrase_list, SIZES):
+
+# phrase_list dictionary: key = phrase list item, value = original shower thought string
+def generate_clusters(num_clusters, 
+  phrase_list, 
+  phrase_list_dictionary, 
+  this_SIZES, 
+  this_THOUGHTS_LIST
+):
   print("-- IN PROCESS: generating clusters")
+  # returns a list of embeddings for each element in phrase_list
   sentence_emb = embedder.encode(phrase_list)
+
+  # returned object that describes cluster: 
+  # maps (key = topic) to (value = list of cleaned sentences in this cluster) 
   clusters = {}
 
+  # actual clustering model
   clustering_model = KMeans(n_clusters=num_clusters)
   clustering_model.fit(sentence_emb)
   cluster_assignment = clustering_model.labels_
 
+  # parse through model results
   clustered_sentences = [[] for i in range(num_clusters)]
+  original_thoughts = [[] for i in range(num_clusters)]
   for sentence_id, cluster_id in enumerate(cluster_assignment):
-      clustered_sentences[cluster_id].append(phrase_list[sentence_id])
+    phrase_list_item = phrase_list[sentence_id]
+    clustered_sentences[cluster_id].append(phrase_list_item)
+    # store original string too
+    original_thoughts[cluster_id].append(phrase_list_dictionary[phrase_list_item])
 
+  # thoughts_list: maps (key = topic) to (value = list) of raw shower thoughts associated with this topic
+  # i is the corresponding index, used for both original_thoughts and clustered_sentences
   for i, cluster in enumerate(clustered_sentences):
+    # cluster = list of words
+    # find_topics: given list of words, finds overarching topic
+    raw_shower_thoughts_list = original_thoughts[i]
     topic = find_topics(cluster)[0]
     cluster = [i for i in cluster if i]
     clusters[topic] = cluster
-    SIZES[topic] = len(cluster)
-  return clusters, SIZES
+    this_SIZES[topic] = len(cluster)
+    # store original strings in dictionary according to topic
+    this_THOUGHTS_LIST[topic] = raw_shower_thoughts_list
+
+  return clusters, this_SIZES, this_THOUGHTS_LIST
 
 
 #######################################################
 ## DATA ANALYSIS + CLUSTER GENERATION
 
+## maps each element in history with the original shower thought string
+def get_mapped_data(history_list):
+  # list of cleaned text inputs
+  cleaned_list = []
+  # maps cleaned text input to original string
+  mapper = {}
+
+  for cleaned_text, original_string in history_list: 
+    new_item = clean_text(cleaned_text)
+    cleaned_list.append(new_item)
+    mapper[new_item] = original_string
+  
+  return cleaned_list, mapper
+
+###### ultimate function to create clustered graph: 
 def create_graph():
   print("-- IN PROCESS: starting to create graph")
   history = get_shower_data()
 
+  # FINAL OBJECTS TO RETURN
   GRAPH = {}
   SIZES = {}
+  THOUGHTS_LIST = {}
 
-  print('history length:', len(history))
 
-  # assert that length is not none (we start with )
-  assert len(history) >1
-
-    # clean data
-  history = [nlp_pipeline(h) for h in history]
-  history = [clean_text(h) for h in history]
-
-  # create root clusters
-  roots, SIZES = generate_clusters(8, history, SIZES)
+  # individual element structure: [cleaned text, original string]
+  history = [[nlp_pipeline(h), h] for h in history]
+  # individual element structure: (cleaned text, original string)
+  history, mapped_history = get_mapped_data(history)
+  
+  # initial clusters
+  roots, SIZES, THOUGHTS_LIST = generate_clusters(10, history, mapped_history, SIZES,THOUGHTS_LIST)
   root_children = {}
 
   # do BFS to generate child clusters and create tree graph of parent-child edges
   queue = []
 
+  # initialize
   clusters = roots
-  size_thresh = 10
-  num_children = 3
+  THRESHOLD = 10
+  NUM_CHILDREN = 3
 
   # add original parent topics
   for topic in roots.keys():
       GRAPH[topic] = set()
-      if SIZES[topic] >= size_thresh:
-          queue.append([topic, topic])
-          root_children[topic] = 1
+      if SIZES[topic] >= THRESHOLD:
+        # add initial queue object
+        queue.append([topic, topic, THOUGHTS_LIST[topic]])
+        root_children[topic] = 1
 
   print("root sizes", SIZES)
+  # each element of BFS queue shoudl store parent_topic, root_topic, list of associated strings
+  #######
   # BFS
   while len(queue) > 0:
-    parent_topic, root_topic = queue.pop(0)
-    # print('parent', parent_topic)
+    parent_topic, root_topic, associated_strings = queue.pop(0)
+    # get cluster info of parent
     parent_cluster = clusters[parent_topic]
-    if len(parent_cluster) >= size_thresh and len(set(parent_cluster)) > num_children:
-      new_clusters, SIZES = generate_clusters(num_children, parent_cluster, SIZES)
+    # parent_thoughts_list = THOUGHTS_LIST[parent_topic]
+    if len(parent_cluster) >= THRESHOLD and len(set(parent_cluster)) > NUM_CHILDREN:
+      # recursively cluster: split into NUM_CHILDREN
+      # TODO: ensure that every item in parent_cluster is in mapped_history
+      original_cluster_items = []
+      new_clusters, SIZES, THOUGHTS_LIST = generate_clusters(
+          NUM_CHILDREN, 
+          parent_cluster, 
+          mapped_history, 
+          SIZES, 
+          THOUGHTS_LIST
+      )
+
       for child_topic in new_clusters.keys():
         if child_topic not in clusters.keys():
           # print('child', child_topic)
@@ -173,22 +228,29 @@ def create_graph():
 
           new_c = new_clusters[child_topic]
           clusters[child_topic] = new_c
-          SIZES[child_topic] = len(new_c)
+          # confirm that this should already be set
+          assert child_topic in list(SIZES.keys())
+          assert child_topic in list(THOUGHTS_LIST.keys())
+          # SIZES[child_topic] = len(new_c)
+          # THOUGHTS_LIST[child_topic] = 
 
           # add child to queue if we re-cluster again
-          if SIZES[child_topic] >= size_thresh:
-            queue.append([child_topic, root_topic])
-          
+          if SIZES[child_topic] >= THRESHOLD:
+            queue.append([child_topic, root_topic, THOUGHTS_LIST[child_topic]])
+
+  # outside of queue    
   print("root_children", root_children)
-  # max_num_children = max(root_children.values())
+  # max_NUM_CHILDREN = max(root_children.values())
+
+  # GETS THE TOPIC with the maximum number of child topics
   max_child_topic = max(root_children, key = root_children.get)
   print(max_child_topic)
 
   # standardize sizes
   factor = 700/sum(SIZES.values())
-  # find misc topic theme
 
 
+  # MISCELLANEOUS
   for k in GRAPH.keys():
     GRAPH[k] = list(GRAPH[k])
 
@@ -202,25 +264,32 @@ def create_graph():
 
   root_topics = list(roots.keys())
   print("roots", root_topics)
+  # change root topic label
   for i in range(len(root_topics)):
     if root_topics[i] == max_child_topic:
       root_topics[i] = 'Miscellaneous'
 
+  # reset graph, thoughts_list, and sizes label
   GRAPH['Miscellaneous'] = GRAPH[max_child_topic]
   del GRAPH[max_child_topic]
   SIZES['Miscellaneous'] = SIZES[max_child_topic]
   del SIZES[max_child_topic]
-    
+  THOUGHTS_LIST['Miscellaneous'] = THOUGHTS_LIST[max_child_topic]
+  del THOUGHTS_LIST[max_child_topic]
+
   print('graph:', GRAPH)
-  return GRAPH, SIZES, root_topics
+  print("----------")
+  print("-----------")
+  print("thoughts list:", THOUGHTS_LIST)
+  return GRAPH, SIZES, root_topics, THOUGHTS_LIST
 
-
+#######
 ## function to write to csv file
 def append_to_csv(showerthought):
   # data we want to add as new row
   rowlist = [1,'N/A','N/A', 1, 'N/A',1,'N/A','N/A', 'N/A', showerthought,'N/A' ]
 
-  # with open('event.csv', 'a') as f_object:
+  # append to csv file
   with open('shower_thoughts.csv', 'a') as f_object:  
       writer_object = writer(f_object)
       writer_object.writerow(rowlist)
