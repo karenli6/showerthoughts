@@ -7,3 +7,4 @@ build/
 pyenv/
 
 __pycache__/
+bundle.js
