@@ -6,7 +6,7 @@ import numpy as np
 def get_shower_data():
   # print("hello")
   thishist = []
-  with open('shower_thoughts.csv', 'r') as csvfile:
+  with open('shower_thoughts_testing.csv', 'r') as csvfile:
     datareader = csv.reader(csvfile)
     for row in datareader:
         thishist.append(row[9])
