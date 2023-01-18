@@ -121,8 +121,6 @@ def generate_clusters(num_clusters, phrase_list, SIZES):
 
 def create_graph():
   print("-- IN PROCESS: starting to create graph")
-
-  # get strings
   history = get_shower_data()
 
   GRAPH = {}
@@ -138,7 +136,6 @@ def create_graph():
   history = [clean_text(h) for h in history]
 
   # create root clusters
-  # print("generating roots")
   roots, SIZES = generate_clusters(8, history, SIZES)
   root_children = {}
 
@@ -157,8 +154,6 @@ def create_graph():
           root_children[topic] = 1
 
   print("root sizes", SIZES)
-
-
   # BFS
   while len(queue) > 0:
     parent_topic, root_topic = queue.pop(0)
@@ -222,15 +217,12 @@ def create_graph():
 
 ## function to write to csv file
 def append_to_csv(showerthought):
-  # List that we want to add as a new row
+  # data we want to add as new row
   rowlist = [1,'N/A','N/A', 1, 'N/A',1,'N/A','N/A', 'N/A', showerthought,'N/A' ]
-  
-  # Open our existing CSV file in append mode
 
   # with open('event.csv', 'a') as f_object:
   with open('shower_thoughts.csv', 'a') as f_object:  
       writer_object = writer(f_object)
       writer_object.writerow(rowlist)
-  
       f_object.close()
   return True

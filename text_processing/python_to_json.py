@@ -1,4 +1,5 @@
-# convert node graph to D3 viz
+# convert python graph to node object
+# note: adapted from lotus (project)
 import json
 
 def graph_to_js(GRAPH, SIZES, ROOTS):
@@ -25,11 +26,10 @@ def graph_to_js(GRAPH, SIZES, ROOTS):
         for child in graph[s]:
           if child not in visited:
             visited.append(child)
-            neo4j_obj["nodes"].append({"id": child, "group": group,"size": SIZES[child]})
+            neo4j_obj["nodes"].append({"id": child, "color_label": group,"size": SIZES[child]})
 
             # create link between node and neighbor
             neo4j_obj["links"].append({"source": s, "target": child, "value": 10})
-
             queue.append(child)
 
 
