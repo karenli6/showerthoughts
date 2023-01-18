@@ -1,7 +1,7 @@
 from flask import Flask
 
-flaskapp = Flask(   __name__,
-                    static_folder='./public',
-                    template_folder='./static')
+app = Flask(    __name__,
+                static_folder='./public',
+                template_folder='./static')
 
-import templates.app.views
+import templates.flaskapp.views

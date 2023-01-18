@@ -6,4 +6,6 @@ node_modules/
 build/
 pyenv/
 
+# auto-generated files
 __pycache__/
+bundle.js
