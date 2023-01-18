@@ -9,3 +9,4 @@ pyenv/
 # auto-generated files
 __pycache__/
 bundle.js
+nltk_data/

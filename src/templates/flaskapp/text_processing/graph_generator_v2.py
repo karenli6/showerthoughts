@@ -18,9 +18,10 @@ from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
 
 # get string data
-from parse_thoughts import get_shower_data
+from .parse_thoughts import get_shower_data
+from .config import NLTK_DATA_DIR
 import nltk
-nltk.download('punkt')
+nltk.download('punkt', download_dir=NLTK_DATA_DIR)
 
 sentenceembedder = SentenceTransformer('all-MiniLM-L6-v2')
 sentences = get_shower_data()
