@@ -29,7 +29,9 @@ First run flask backend: 'cd text_processing' --> 'python3 -B app.py'
 
 ## TODO
 
+
 ~~softly in order of importance:~~
+- also, for coloring the different nodes, there is an error where "group" label should be "color_label" (inside `python_to_json.py`).
 
 - ~~add `onHover` property to nodes: show group number (JSON `group`) + topic label (JSON `id`)~~
 - ~~add color to nodes according to group number~~
