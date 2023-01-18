@@ -98,20 +98,27 @@ def clean_text(text):
 # need to specify number of clusters wanted (k)
 
 # phrase_list dictionary: key = phrase list item, value = original shower thought string
-def generate_clusters(num_clusters, phrase_list, phrase_list_dictionary, this_SIZES, this_THOUGHTS_LIST):
+def generate_clusters(num_clusters, 
+  phrase_list, 
+  phrase_list_dictionary, 
+  this_SIZES, 
+  this_THOUGHTS_LIST
+):
   print("-- IN PROCESS: generating clusters")
   # returns a list of embeddings for each element in phrase_list
   sentence_emb = embedder.encode(phrase_list)
 
-  # returned dictionary object: key = topic
+  # returned object that describes cluster: 
+  # maps (key = topic) to (value = list of cleaned sentences in this cluster) 
   clusters = {}
 
+  # actual clustering model
   clustering_model = KMeans(n_clusters=num_clusters)
   clustering_model.fit(sentence_emb)
   cluster_assignment = clustering_model.labels_
 
+  # parse through model results
   clustered_sentences = [[] for i in range(num_clusters)]
-  
   original_thoughts = [[] for i in range(num_clusters)]
   for sentence_id, cluster_id in enumerate(cluster_assignment):
     phrase_list_item = phrase_list[sentence_id]
@@ -119,7 +126,7 @@ def generate_clusters(num_clusters, phrase_list, phrase_list_dictionary, this_SI
     # store original string too
     original_thoughts[cluster_id].append(phrase_list_dictionary[phrase_list_item])
 
-  # thoughts_list: key = topic, value = list of raw shower thoughts associated with this topic
+  # thoughts_list: maps (key = topic) to (value = list) of raw shower thoughts associated with this topic
   # i is the corresponding index, used for both original_thoughts and clustered_sentences
   for i, cluster in enumerate(clustered_sentences):
     # cluster = list of words
@@ -167,8 +174,7 @@ def create_graph():
   history = [[nlp_pipeline(h), h] for h in history]
   # individual element structure: (cleaned text, original string)
   history, mapped_history = get_mapped_data(history)
-  # history = [[clean_text(edited_h[0]), edited_h[1]] for edited_h in history]
-
+  
   # initial clusters
   roots, SIZES, THOUGHTS_LIST = generate_clusters(10, history, mapped_history, SIZES,THOUGHTS_LIST)
   root_children = {}

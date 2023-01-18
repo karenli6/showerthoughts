@@ -10,6 +10,7 @@ The inclusion of gesture controls is intended to make the audience’s interacti
 ## Directory and File Structure: 
 NOTE: 
 - 'dev' is the folder for temporary code/notes that aren't part of the final product.
+- The most updated NLP backend version lives inside dev at the moment.
 - 'src' is the folder containing final code files.
 
 ## How to set up and run the app & backend
