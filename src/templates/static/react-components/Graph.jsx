@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ForceGraph3D from 'react-force-graph-3d';
 
 class Graph extends React.Component {
