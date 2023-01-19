@@ -10,8 +10,8 @@ The inclusion of gesture controls is intended to make the audience’s interacti
 ## Directory and File Structure: 
 NOTE: 
 - 'dev' is the folder for temporary code/notes that aren't part of the final product.
-- The most updated NLP backend version lives inside dev at the moment.
 - 'src' is the folder containing final code files.
+- CURRENTLY: ONLY WORKING WITHIN SRC. 
 
 ## How to set up and run the app & backend
 1. Set up Python virtual environment. Enter your python virtual environment and install all dependencies (`pip install -r requirements.txt`).
@@ -31,8 +31,7 @@ First run flask backend: 'cd text_processing' --> 'python3 -B app.py'
 
 
 ~~softly in order of importance:~~
-- also, for coloring the different nodes, there is an error where "group" label should be "color_label" (inside `python_to_json.py`).
-
+- on LOAD: contain nodes within canvas.
 - ~~add `onHover` property to nodes: show group number (JSON `group`) + topic label (JSON `id`)~~
 - ~~add color to nodes according to group number~~
 - color graph edges (somehow...)
