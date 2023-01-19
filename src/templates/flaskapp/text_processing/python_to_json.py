@@ -2,7 +2,7 @@
 # note: adapted from lotus (project)
 import json
 
-def graph_to_js(GRAPH, SIZES, ROOTS):
+def graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS):
   print('graph to d3:')
   print('sizes:', SIZES)
 
@@ -16,7 +16,12 @@ def graph_to_js(GRAPH, SIZES, ROOTS):
 
   def bfs(group, graph, node):
     if node not in visited:
-      neo4j_obj["nodes"].append({"id": node, "color_label": group, "size": SIZES[node]})
+      neo4j_obj["nodes"].append({
+        "id": node, 
+        "color_label": group, 
+        "size": SIZES[node],
+        "original_thoughts":THOUGHTS[node]
+      })
       visited.append(node) 
       queue.append(node) 
 
@@ -26,7 +31,13 @@ def graph_to_js(GRAPH, SIZES, ROOTS):
         for child in graph[s]:
           if child not in visited:
             visited.append(child)
-            neo4j_obj["nodes"].append({"id": child, "color_label": group,"size": SIZES[child]})
+            neo4j_obj["nodes"].append({
+              "id": child, 
+              "color_label": group,
+              "size": SIZES[child],
+              "original_thoughts":THOUGHTS[child]
+
+            })
 
             # create link between node and neighbor
             neo4j_obj["links"].append({"source": s, "target": child, "value": 10})
@@ -37,6 +48,8 @@ def graph_to_js(GRAPH, SIZES, ROOTS):
   for root in ROOTS:
     bfs(color_label, GRAPH, root)
     color_label +=1
+  
+  # add thoughts
 
   y = json.dumps(neo4j_obj)
 

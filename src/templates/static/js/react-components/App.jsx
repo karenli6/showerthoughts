@@ -10,7 +10,10 @@ import RenderForm from './RenderForm';
 import * as testdata from '../../../flaskapp/text_processing/js_graph.json'; 
 // const fgRef = useRef(1);
 
+
 function App() {
+    
+    // parse through
     return  ( 
         <div id="component-app">
         <h1>[ SHOWERTHOUGHTS-DEV ]</h1>

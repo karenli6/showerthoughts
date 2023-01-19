@@ -22,10 +22,10 @@ def process():
     assert append_status == True
 
     # trigger text processing
-    GRAPH, SIZES, ROOTS = create_graph()
+    GRAPH, SIZES, ROOTS, THOUGHTS = create_graph()
 
     # # convert graph to d3 json object
-    status = graph_to_js(GRAPH, SIZES, ROOTS)
+    status = graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS)
     # assert status == True
     
     return 'OK', 200
