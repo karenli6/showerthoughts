@@ -1,7 +1,7 @@
-from templates import app
+# from templates import app
 from flask import render_template, request
-from templates.flaskapp.text_processing.graph_utils import append_to_csv, create_graph
-from templates.flaskapp.text_processing.python_to_json import graph_to_js
+from flaskapp.text_processing.graph_utils import append_to_csv, create_graph
+from flaskapp.text_processing.python_to_json import graph_to_js
 
 @app.route('/')
 def index():
@@ -10,6 +10,7 @@ def index():
 @app.post('/process')
 def process():
     # [DEBUG] print out submitted POST request contents
+    print("REACHED PROCESS SUBMISSION-----")
     print(f"[POST] shower thought added: \"${request.form['user_input']}\"")
 
     # POST request
