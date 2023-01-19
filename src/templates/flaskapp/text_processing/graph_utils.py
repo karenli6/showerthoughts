@@ -291,7 +291,8 @@ def append_to_csv(showerthought):
   rowlist = [1,'N/A','N/A', 1, 'N/A',1,'N/A','N/A', 'N/A', showerthought,'N/A' ]
 
   # append to csv file
-  with open('shower_thoughts.csv', 'a') as f_object:  
+  from .config import DATA_CSV_PATH
+  with open(DATA_CSV_PATH, 'a') as f_object:  
       writer_object = writer(f_object)
       writer_object.writerow(rowlist)
       f_object.close()

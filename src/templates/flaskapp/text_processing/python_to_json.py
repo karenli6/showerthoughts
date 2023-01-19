@@ -2,7 +2,9 @@
 # note: adapted from lotus (project)
 import json
 
-def graph_to_js(GRAPH, SIZES, ROOTS):
+from .config import GRAPH_JSON_PATH
+
+def graph_to_js(GRAPH, SIZES, ROOTS, outpath=GRAPH_JSON_PATH):
   print('graph to d3:')
   print('sizes:', SIZES)
 
@@ -40,7 +42,7 @@ def graph_to_js(GRAPH, SIZES, ROOTS):
 
   y = json.dumps(neo4j_obj)
 
-  with open("js_graph.json", "w") as outfile:
+  with open(outpath, "w") as outfile:
       outfile.write(y)
   
   return True

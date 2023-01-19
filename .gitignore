@@ -5,6 +5,7 @@ dev/external/*
 node_modules/
 build/
 pyenv/
+old/
 
 # auto-generated files
 __pycache__/
