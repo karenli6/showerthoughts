@@ -15,16 +15,13 @@ NOTE:
 
 ## How to set up and run the app & backend
 1. Set up Python virtual environment. Enter your python virtual environment and install all dependencies (`pip install -r requirements.txt`).
-2. JAVASCRIPT: enter the `templates/src` directory and run `npm i` to install needed nodejs modules
-
+2. JAVASCRIPT: enter the `src` directory --> 'cd templates' --> 'cd frontend' --> run `npm i` to install needed nodejs modules
 
 
 After dependencies are added, the app can be run anytime via the following:
-First run flask backend: 'cd text_processing' --> 'python3 -B app.py'
-
-1. Then, open two other terminals (two programs need to be running simultaneously, but this will likely change)
-2. in the first terminal, enter the `templates/src` directory and run `npm run watch`
-3. in the second terminal (assuming you're within your python virtual environment), go the root directory of the app (`showerthoughts/src`) and run `python run.py`
+1. Open 2 terminals. 
+2. First, in one terminal, run the react frontend: 'cd templates' --> 'cd frontend' --> 'npm run watch'
+3. next, in the SECOND terminal, start the backend: run flask backend in one terminal: 'cd src' -> 'cd templates' --> 'python3 -B app.py'
 4. open a browser and go to [localhost:5000](https://127.0.0.1:5000)
 
 ## TODO
