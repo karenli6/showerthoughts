@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRef, useCallback } from 'react';
 
 import Graph from './Graph';
 import RenderForm from './RenderForm';

@@ -17,7 +17,7 @@ function RenderForm() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "package": response })
+            body: JSON.stringify({ "package": newthought })
         }).then(function (response) {
             return response.text();
         })
