@@ -1,12 +1,14 @@
 from flask import Flask, jsonify, request, render_template
 import os
 import sys
+from csv import writer
 
-from flaskapp.text_processing.graph_utils import append_to_csv
+from backend.graph_utils import create_graph
+from backend.python_to_json import graph_to_js
 
 app = Flask(    __name__,
                 static_folder='./public',
-                template_folder='./static')
+                template_folder='./frontend')
 
 @app.route('/')
 def default():
@@ -18,21 +20,24 @@ def process():
     # POST request
     print("SUCCESSS - REACHED FLASK")
     incoming_req = request.get_json()
-    incoming_thought = incoming_req["package"]
+    incoming_thought = [incoming_req["package"]]
 
  
     assert request.method == 'POST'
 
-    # # append to existing csv file
-    append_status = append_to_csv(incoming_thought)
-    assert append_status == True
+    # append to csv file
+    with open('backend/shower_thoughts_testing.csv', 'a+', newline='') as f_object:  
+        # writer_object = writer(f_object)
+        csv_writer = writer(f_object)
+        csv_writer.writerow(incoming_thought)
 
-    # # trigger text processing
-    # GRAPH, SIZES, ROOTS = create_graph()
+        f_object.close()
 
-    # # # convert graph to d3 json object
-    # status = graph_to_js(GRAPH, SIZES, ROOTS)
-    # # assert status == True
+    # trigger text processing
+    GRAPH, SIZES, ROOTS, THOUGHTS_LIST = create_graph()
+
+    status = graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS_LIST)
+    assert status == True
     
     return 'OK', 200
 
