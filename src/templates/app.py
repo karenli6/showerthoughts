@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, json
 import os
 import sys
 from csv import writer
@@ -36,10 +36,14 @@ def process():
     # trigger text processing
     GRAPH, SIZES, ROOTS, THOUGHTS_LIST = create_graph()
 
-    status = graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS_LIST)
-    assert status == True
-    
-    return 'OK', 200
+    json_obj = graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS_LIST)
+    response = app.response_class(
+        response=json_obj,
+        status=200,
+        mimetype='application/json'
+    )
+
+    return response
 
 if __name__ == "__main__":
   # Set environment variables

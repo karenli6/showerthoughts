@@ -56,4 +56,4 @@ def graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS):
   with open("backend/js_graph.json", "w") as outfile:
       outfile.write(y)
   
-  return True
+  return y
