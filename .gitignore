@@ -1,10 +1,16 @@
 # local versions of packages + repos
-dev/external/*
+dev/external/
 
 # local dev files
 node_modules/
 build/
-pyenv/
+*env/
+logs/
+.vscode/
+
+# retired/dormant
+showerthoughts/
+old/
 
 # auto-generated files
 __pycache__/
