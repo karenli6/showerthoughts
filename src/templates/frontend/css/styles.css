@@ -1,0 +1,15 @@
+#component-app-elements {
+    position: relative;
+}
+
+#component-addthoughtform {
+    position: absolute;
+    top: 0;
+    padding-top: 1vw;
+    left: 0;
+    padding-left: 1vw;
+}
+
+#component-addthoughtform-form {
+    padding-top: 1vw;
+}
