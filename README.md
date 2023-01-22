@@ -60,3 +60,5 @@ References, resources, and inspiration: @cynthia9chen, (project) [lotus](https:/
 https://github.com/vasturiano/react-force-graph
 
 metalab @ Harvard Advisor: Dr. des. Kim Frederic Albrecht, Principal Investigator metaLAB (at) Harvard & FU Berlin
+
+Special thanks to the [Conflux Collective](https://confluxcollective.org/)
