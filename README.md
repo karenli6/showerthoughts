@@ -26,16 +26,10 @@ After dependencies are added, the app can be run anytime via the following:
 
 ## TODO
 
-
-~~softly in order of importance:~~
-- on LOAD: contain nodes within canvas.
-- ~~add `onHover` property to nodes: show group number (JSON `group`) + topic label (JSON `id`)~~
-- ~~add color to nodes according to group number~~
-- color graph edges (somehow...)
-- ~~add form for adding new thoughts at runtime (contained in React component `showerthoughts/text_processing/templates/render_form.js`)~~
-- ~~add styling (bootstrap.css?)~~
-- integrate real-time updates of graph on backend when new thoughts are added with frontend
-- actually make everything look good (styling, animation, positioning...)
+- hardware setup
+- text animation? 
+- polish frontend
+- cleanup codebase
 
 other:
 
