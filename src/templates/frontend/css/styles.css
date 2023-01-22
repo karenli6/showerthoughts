@@ -1,3 +1,11 @@
+body {
+    background-color: black;
+}
+
+#component-app-title h1 {
+    color: white;
+}
+
 #component-app-elements {
     position: relative;
 }
@@ -8,8 +16,5 @@
     padding-top: 1vw;
     left: 0;
     padding-left: 1vw;
-}
-
-#component-addthoughtform-form {
-    padding-top: 1vw;
+    width: 30vw;
 }

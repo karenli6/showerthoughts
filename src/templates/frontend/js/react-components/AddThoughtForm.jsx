@@ -6,6 +6,7 @@ import Collpase from 'react-bootstrap/Collapse';
 // import Stack from 'react-bootstrap/Stack';
 
 const darkColorHex = '#333333';
+const darkColorOpacity = '0.8';
 const lightColorHex = '#ffffff';
 
 function AddThoughtForm(props) {
@@ -18,28 +19,31 @@ function AddThoughtForm(props) {
     );
 
     const formElement = (
-        <div id="component-addthoughtform-form">
-            <Form onSubmit={ props.submitHandler }>
-                <Form.Group className="mb-3">
-                    <Form.Control type="text" id="user_input" name="user_input" onChange={ props.onChangeHandler } />
-                    <Form.Text style={{ color: lightColorHex }}>
-                        Add your thought to the collection here
-                    </Form.Text>
-                </Form.Group>
-                <Button variant="dark" type="Submit" onClick={ () => setFormVisible(true) } >
-                    Submit
-                </Button>
-            </Form>
-        </div>
+        <Form onSubmit={ props.submitHandler }>
+            <Form.Group className="mb-3">
+                <Form.Control type="text" id="user_input" name="user_input" onChange={ props.onChangeHandler } />
+                <Form.Text style={{ color: lightColorHex }}>
+                    Add your thought to the collection here
+                </Form.Text>
+            </Form.Group>
+            <Button variant="dark" type="Submit" onClick={ () => setFormVisible(true) } >
+                Submit
+            </Button>
+        </Form>
     );
 
     return (
         <div id="component-addthoughtform">
-            <Card style={{ width: '50%', backgroundColor: darkColorHex }}>
+            <Card style={{ backgroundColor: darkColorHex, opacity: darkColorOpacity }}>
                 <Card.Body>
-                    { toggleButtonElement }
+                    <div id="component-addthoughtform-toggle">
+                        { toggleButtonElement }
+                    </div>
                     <Collpase in={ formVisible }>
-                        { formElement }
+                        <div id="component-addthoughtform-form">
+                            <br />
+                            { formElement }
+                        </div>
                     </Collpase>
                 </Card.Body>
             </Card>
