@@ -1,5 +1,11 @@
-# pipeline: clean each text and reduce to main words --> Perform kmeans clustering on list of phrases
-# --> re cluster if the node is too large
+# graph utils: contains all python text processing functions
+# references: lotus project
+# pipeline: 
+# --> clean each text and reduce to key words 
+# --> embed sentence inputs into vectors
+# --> perform k-means clustering (recursive if node is too large)
+# --> build graph
+
 import csv
 from csv import writer
 import numpy as np
@@ -10,9 +16,6 @@ os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
-
-# get string data
-# from .parse_thoughts import get_shower_data
 
 
 # imports for NLP
@@ -45,6 +48,7 @@ def get_shower_data():
   with open('backend/shower_thoughts_testing.csv', 'r') as csvfile:
     datareader = csv.reader(csvfile)
     for row in datareader:
+      if len(row)>0:
         thishist.append(row[0])
   finalhist = thishist[2:]
   print(finalhist[0])
@@ -178,7 +182,7 @@ def create_graph():
   print("-- IN PROCESS: starting to create graph")
   history = get_shower_data()
 
-  # FINAL OBJECTS TO RETURN
+  # DATA TO RETURN
   GRAPH = {}
   SIZES = {}
   THOUGHTS_LIST = {}
@@ -199,7 +203,7 @@ def create_graph():
   # initialize
   clusters = roots
   THRESHOLD = 10
-  NUM_CHILDREN = 3
+  NUM_CHILDREN = 5
 
   # add original parent topics
   for topic in roots.keys():
@@ -210,7 +214,7 @@ def create_graph():
         root_children[topic] = 1
 
   print("root sizes", SIZES)
-  # each element of BFS queue shoudl store parent_topic, root_topic, list of associated strings
+  # each element of BFS queue should store parent_topic, root_topic, list of associated strings
   #######
   # BFS
   while len(queue) > 0:
@@ -246,15 +250,14 @@ def create_graph():
           assert child_topic in list(SIZES.keys())
           assert child_topic in list(THOUGHTS_LIST.keys())
           # SIZES[child_topic] = len(new_c)
-          # THOUGHTS_LIST[child_topic] = 
 
           # add child to queue if we re-cluster again
           if SIZES[child_topic] >= THRESHOLD:
+
             queue.append([child_topic, root_topic, THOUGHTS_LIST[child_topic]])
 
   # outside of queue    
   print("root_children", root_children)
-  # max_NUM_CHILDREN = max(root_children.values())
 
   # GETS THE TOPIC with the maximum number of child topics
   max_child_topic = max(root_children, key = root_children.get)
@@ -263,11 +266,9 @@ def create_graph():
   # standardize sizes
   factor = 700/sum(SIZES.values())
 
-
   # MISCELLANEOUS
   for k in GRAPH.keys():
     GRAPH[k] = list(GRAPH[k])
-
     SIZES[k] = factor * SIZES[k]
 
 
@@ -296,16 +297,3 @@ def create_graph():
   print("-----------")
   print("thoughts list:", THOUGHTS_LIST)
   return GRAPH, SIZES, root_topics, THOUGHTS_LIST
-
-#######
-## function to write to csv file
-# def append_to_csv(showerthought):
-#   # data we want to add as new row
-#   rowlist = [1,'N/A','N/A', 1, 'N/A',1,'N/A','N/A', 'N/A', showerthought,'N/A' ]
-
-#   # append to csv file
-#   with open('shower_thoughts.csv', 'a') as f_object:  
-#       writer_object = writer(f_object)
-#       writer_object.writerow(rowlist)
-#       f_object.close()
-#   return True

@@ -30,6 +30,42 @@ function Graph(props) {
 
     }, [fgRef]);
 
+    // for link highlight
+    const graphLinks = props.data["links"]
+    const graphNodes = props.data["nodes"]
+    let targetNode = null;
+
+
+    graphNodes.forEach(node_obj => {
+        console.log(node_obj)
+        if (node_obj["highlight"] == true){
+            targetNode = node_obj["id"]
+        }
+    })
+
+
+    const highlightLinks = new Set();
+    // // find target mode and identify all neighbors
+    graphLinks.forEach(link_obj => {
+        console.log(link_obj)
+        if (link_obj["source"] == targetNode){
+            highlightLinks.add(link_obj)
+        }
+    })
+
+      // node highlighter
+      const nodeHighlighter = (node) => {
+        // console.log("CHECKING NODE COLOR", node.highlight, node)
+        if (node.highlight == true){
+            return 'red';
+        }else{
+            return 'rgba(0,255,255,0.6)';
+        }
+        
+        }
+
+
+    console.log("thse are the target node and links: " , targetNode, highlightLinks)
     return (
 
         <div id="component-graph">
@@ -37,11 +73,21 @@ function Graph(props) {
                 ref={fgRef}
                 graphData={props.data}
                 nodeLabel="id"
+                nodeVal="size"
                 nodeAutoColorBy="color_label"
                 onNodeClick={handleClick}
-                linkWidth={2}
-            // cooldownTicks={100}
-            // onEngineStop={() => fgRef.current.zoomToFit(400)}
+                // linkWidth={2}
+                nodeColor={nodeHighlighter}
+                linkWidth={link => highlightLinks.has(link) ? 5 : 1}
+                linkDirectionalParticles={4}
+                linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
+
+                // linkWidth={linkWidthHighlighter}
+
+                // linkDirectionalParticles={linkDirectionHighlighter}
+       
+                // nodeCanvasObjectMode={node => node.highlight ? 'before' : undefined}
+                // nodeCanvasObject={paintRing}
             />
 
             {nodeClicked > 0 &&

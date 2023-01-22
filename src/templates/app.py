@@ -36,7 +36,8 @@ def process():
     # trigger text processing
     GRAPH, SIZES, ROOTS, THOUGHTS_LIST = create_graph()
 
-    json_obj = graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS_LIST)
+    json_obj = graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS_LIST, incoming_thought[0])
+
     response = app.response_class(
         response=json_obj,
         status=200,
