@@ -1,4 +1,5 @@
 const path = require('path');
+const WebpackWatchPlugin = require('webpack-watch-files-plugin').default;
 
 module.exports = {
     entry : path.resolve(__dirname, 'js', 'index.jsx'),
@@ -24,5 +25,19 @@ module.exports = {
                 use : [ 'style-loader', 'css-loader' ],
             }
         ],
+    },
+    plugins : [
+        new WebpackWatchPlugin({
+            files : [
+                './js/*.jsx',
+                './js/react-components/*.jsx',
+                './css/*.css',
+                '../public/css/*.css'
+            ]
+        }),
+    ],
+    watchOptions : {
+        aggregateTimeout : 1000,
+        poll: 5000,
     },
 };
