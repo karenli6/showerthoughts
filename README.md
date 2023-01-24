@@ -27,9 +27,10 @@ After dependencies are added, the app can be run anytime via the following:
 ## TODO
 
 - hardware setup
-- text animation? 
-- polish frontend
-- cleanup codebase
+- informational slide show
+- text animation
+- node label
+- cleanup codebase (in progress)
 
 other:
 
