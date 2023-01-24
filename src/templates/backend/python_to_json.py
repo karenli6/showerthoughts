@@ -1,11 +1,10 @@
 # convert python graph to node object
 # note: adapted from lotus (project)
 import json
+from .color_generator import get_color_array
 
 ## converts graph object to
 def graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS, highlight_thought):
-  print('graph to d3:')
-  print("original thought: ", highlight_thought)
   # print('sizes:', SIZES)
 
   neo4j_obj = {
@@ -55,7 +54,14 @@ def graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS, highlight_thought):
     bfs(color_label, GRAPH, root)
     color_label +=1
   
-  y = json.dumps(neo4j_obj)
+  ## get associated colors
+  color_array = get_color_array(len(ROOTS))
+  total_package = {
+    "graph": neo4j_obj, 
+    "colors": color_array
+  }
+
+  y = json.dumps(total_package)
 
   with open("backend/js_graph.json", "w") as outfile:
       outfile.write(y)

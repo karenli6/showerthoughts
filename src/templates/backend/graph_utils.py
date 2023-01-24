@@ -113,9 +113,8 @@ def clean_text(text):
 
 #############
 # Perform kmeans clustering on list of phrases
-# need to specify number of clusters wanted (k)
 
-# phrase_list dictionary: key = phrase list item, value = original shower thought string
+# phrase_list dictionary: (key = phrase list item), (value = original shower thought string)
 def generate_clusters(num_clusters, 
   phrase_list, 
   phrase_list_dictionary, 
@@ -138,6 +137,7 @@ def generate_clusters(num_clusters,
   # parse through model results
   clustered_sentences = [[] for i in range(num_clusters)]
   original_thoughts = [[] for i in range(num_clusters)]
+
   for sentence_id, cluster_id in enumerate(cluster_assignment):
     phrase_list_item = phrase_list[sentence_id]
     clustered_sentences[cluster_id].append(phrase_list_item)
@@ -153,6 +153,8 @@ def generate_clusters(num_clusters,
     topic = find_topics(cluster)[0]
     cluster = [i for i in cluster if i]
     clusters[topic] = cluster
+    # ensure that the length of cluster reflects the list of original thoughts
+    assert len(cluster) == len(raw_shower_thoughts_list)
     this_SIZES[topic] = len(cluster)
     # store original strings in dictionary according to topic
     this_THOUGHTS_LIST[topic] = raw_shower_thoughts_list
@@ -187,10 +189,9 @@ def create_graph():
   SIZES = {}
   THOUGHTS_LIST = {}
 
-
-  # individual element structure: [cleaned text, original string]
+  # element structure: [cleaned text, original string]
   history = [[nlp_pipeline(h), h] for h in history]
-  # individual element structure: (cleaned text, original string)
+  # element structure: (cleaned text, original string)
   history, mapped_history = get_mapped_data(history)
   
   # initial clusters
@@ -214,9 +215,8 @@ def create_graph():
         root_children[topic] = 1
 
   print("root sizes", SIZES)
+  ### BFS
   # each element of BFS queue should store parent_topic, root_topic, list of associated strings
-  #######
-  # BFS
   while len(queue) > 0:
     parent_topic, root_topic, associated_strings = queue.pop(0)
     # get cluster info of parent
@@ -236,7 +236,6 @@ def create_graph():
 
       for child_topic in new_clusters.keys():
         if child_topic not in clusters.keys():
-          # print('child', child_topic)
           root_children[root_topic] += 1
 
           # add links between parent + child to graph
@@ -249,48 +248,46 @@ def create_graph():
           # confirm that this should already be set
           assert child_topic in list(SIZES.keys())
           assert child_topic in list(THOUGHTS_LIST.keys())
-          # SIZES[child_topic] = len(new_c)
 
           # add child to queue if we re-cluster again
           if SIZES[child_topic] >= THRESHOLD:
-
             queue.append([child_topic, root_topic, THOUGHTS_LIST[child_topic]])
 
   # outside of queue    
   print("root_children", root_children)
 
-  # GETS THE TOPIC with the maximum number of child topics
-  max_child_topic = max(root_children, key = root_children.get)
-  print(max_child_topic)
+  # # identify the topic with the maximum number of child topics
+  # max_child_topic = max(root_children, key = root_children.get)
+  # print(max_child_topic)
 
-  # standardize sizes
-  factor = 700/sum(SIZES.values())
+  # # standardize sizes
+  # factor = 700/sum(SIZES.values())
 
-  # MISCELLANEOUS
-  for k in GRAPH.keys():
-    GRAPH[k] = list(GRAPH[k])
-    SIZES[k] = factor * SIZES[k]
+  # # MISCELLANEOUS
+  # for k in GRAPH.keys():
+  #   GRAPH[k] = list(GRAPH[k])
+  #   SIZES[k] = factor * SIZES[k]
 
 
-  for child in GRAPH[max_child_topic]:
-    for i in range(len(GRAPH[child])):
-      if GRAPH[child][i] == max_child_topic:
-          GRAPH[child][i] = 'Miscellaneous'
+  # for child in GRAPH[max_child_topic]:
+  #   for i in range(len(GRAPH[child])):
+  #     if GRAPH[child][i] == max_child_topic:
+  #         GRAPH[child][i] = 'Miscellaneous'
 
   root_topics = list(roots.keys())
-  print("roots", root_topics)
-  # change root topic label
-  for i in range(len(root_topics)):
-    if root_topics[i] == max_child_topic:
-      root_topics[i] = 'Miscellaneous'
+  
+  # # change root topic label
+  # for i in range(len(root_topics)):
+  #   if root_topics[i] == max_child_topic:
+  #     root_topics[i] = 'Miscellaneous'
 
-  # reset graph, thoughts_list, and sizes label
-  GRAPH['Miscellaneous'] = GRAPH[max_child_topic]
-  del GRAPH[max_child_topic]
-  SIZES['Miscellaneous'] = SIZES[max_child_topic]
-  del SIZES[max_child_topic]
-  THOUGHTS_LIST['Miscellaneous'] = THOUGHTS_LIST[max_child_topic]
-  del THOUGHTS_LIST[max_child_topic]
+  # # reset graph, thoughts_list, and sizes label
+  # GRAPH['Miscellaneous'] = GRAPH[max_child_topic]
+  # del GRAPH[max_child_topic]
+  # SIZES['Miscellaneous'] = SIZES[max_child_topic]
+  # del SIZES[max_child_topic]
+  # THOUGHTS_LIST['Miscellaneous'] = THOUGHTS_LIST[max_child_topic]
+  # del THOUGHTS_LIST[max_child_topic]
 
   print('graph:', GRAPH)
   print("----------")

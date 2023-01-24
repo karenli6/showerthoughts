@@ -14,23 +14,19 @@ app = Flask(    __name__,
 def default():
   return render_template('index.html')
 
-
+# process user innput
 @app.route('/process', methods=['GET', 'POST'])
 def process():
     # POST request
     print("SUCCESSS - REACHED FLASK")
     incoming_req = request.get_json()
     incoming_thought = [incoming_req["package"]]
-
- 
     assert request.method == 'POST'
 
     # append to csv file
     with open('backend/shower_thoughts_testing.csv', 'a+', newline='') as f_object:  
-        # writer_object = writer(f_object)
         csv_writer = writer(f_object)
         csv_writer.writerow(incoming_thought)
-
         f_object.close()
 
     # trigger text processing
@@ -43,10 +39,7 @@ def process():
         status=200,
         mimetype='application/json'
     )
-
     return response
 
 if __name__ == "__main__":
-  # Set environment variables
-  # os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
   app.run(debug=True)
