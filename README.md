@@ -46,8 +46,9 @@ other:
 - have help dialogs to explain what actions are available (one at a time) that fade in and fade out during periods of user inactivity
 
 
-# Written project proposal
-[LINK](https://docs.google.com/document/d/1z_XaB_Nkq3_TmX9vxULkrqsZ2MO20u3tCEZ2iM6lBpg/edit?usp=sharing)
+# Write-ups
+Project proposal: [LINK](https://docs.google.com/document/d/1z_XaB_Nkq3_TmX9vxULkrqsZ2MO20u3tCEZ2iM6lBpg/edit?usp=sharing)
+Info slide deck: 
 
 # Credits
 Direct contributors: @crifork3, @karenli6
