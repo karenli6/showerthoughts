@@ -57,7 +57,7 @@ other:
 [LINK](https://docs.google.com/document/d/1z_XaB_Nkq3_TmX9vxULkrqsZ2MO20u3tCEZ2iM6lBpg/edit?usp=sharing)
 
 # Credits
-Direct contributors: @crifork3, @karenli6
+Direct contributors: @trifork3, @karenli6
 References, resources, and inspiration: @cynthia9chen, (project) [lotus](https://github.com/karenli6/lotus)
 https://github.com/vasturiano/react-force-graph
 
