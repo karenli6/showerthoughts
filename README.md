@@ -26,16 +26,11 @@ After dependencies are added, the app can be run anytime via the following:
 
 ## TODO
 
-
-~~softly in order of importance:~~
-- on LOAD: contain nodes within canvas.
-- ~~add `onHover` property to nodes: show group number (JSON `group`) + topic label (JSON `id`)~~
-- ~~add color to nodes according to group number~~
-- color graph edges (somehow...)
-- ~~add form for adding new thoughts at runtime (contained in React component `showerthoughts/text_processing/templates/render_form.js`)~~
-- ~~add styling (bootstrap.css?)~~
-- integrate real-time updates of graph on backend when new thoughts are added with frontend
-- actually make everything look good (styling, animation, positioning...)
+- hardware setup
+- informational slide show
+- text animation
+- node label
+- cleanup codebase (in progress)
 
 other:
 
@@ -53,8 +48,9 @@ other:
 - have help dialogs to explain what actions are available (one at a time) that fade in and fade out during periods of user inactivity
 
 
-# Written project proposal
-[LINK](https://docs.google.com/document/d/1z_XaB_Nkq3_TmX9vxULkrqsZ2MO20u3tCEZ2iM6lBpg/edit?usp=sharing)
+# Write-ups
+Project proposal: [LINK](https://docs.google.com/document/d/1z_XaB_Nkq3_TmX9vxULkrqsZ2MO20u3tCEZ2iM6lBpg/edit?usp=sharing)
+Info slide deck: 
 
 # Credits
 Direct contributors: @trifork3, @karenli6
@@ -62,3 +58,5 @@ References, resources, and inspiration: @cynthia9chen, (project) [lotus](https:/
 https://github.com/vasturiano/react-force-graph
 
 metalab @ Harvard Advisor: Dr. des. Kim Frederic Albrecht, Principal Investigator metaLAB (at) Harvard & FU Berlin
+
+Special thanks to the [Conflux Collective](https://confluxcollective.org/)
