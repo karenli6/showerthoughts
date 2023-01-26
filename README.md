@@ -51,6 +51,8 @@ Project proposal: [LINK](https://docs.google.com/document/d/1z_XaB_Nkq3_TmX9vxUL
 
 [EXPERIENCE SLIDE DECK](https://docs.google.com/presentation/d/1HmZknS4jfn35WOqGNYX-ldS-8UVmkdRKk4jn3AK8v80/edit?usp=sharing)
 
+[Music credits](https://www.youtube.com/watch?v=TfMc1JEthzc)
+
 # Credits
 Direct contributors: @crifork3, @karenli6
 References, resources, and inspiration: @cynthia9chen, (project) [lotus](https://github.com/karenli6/lotus)
