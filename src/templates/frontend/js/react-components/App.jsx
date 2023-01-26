@@ -34,6 +34,9 @@ function App() {
       setGraphData(colors_and_graph)
 
     });
+
+    // clear input
+    setNewthought("");
   }
 
   // form input function
@@ -49,7 +52,7 @@ function App() {
       </div>
       <div id="component-app-elements">
         <Graph data={graphData} />
-        <AddThoughtForm submitHandler={ submitFunction } onChangeHandler={ handleChange } />
+        <AddThoughtForm submitHandler={ submitFunction } onChangeHandler={ handleChange } inputValue={newthought} />
       </div>
     </div>
   );
