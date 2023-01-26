@@ -8,6 +8,7 @@ var serverhost = 'http://127.0.0.1:5000';
 
 function App() {
   const [graphData, setGraphData] = useState(testdata);
+  const [nodeClicked, setNodeClicked] = useState(false);
 
   // form functionalities
   let [newthought, setNewthought] = useState("");
@@ -32,6 +33,7 @@ function App() {
       let colors_and_graph = JSON.parse(text)
       // update state of graph data
       setGraphData(colors_and_graph)
+      setNodeClicked(false)
 
     });
 
@@ -47,11 +49,11 @@ function App() {
 
   return (
     <div id="component-app">
-      <div id="component-app-title">
+      {/* <div id="component-app-title">
         <h1>[ #showerthoughts ]</h1>
-      </div>
+      </div> */}
       <div id="component-app-elements">
-        <Graph data={graphData} />
+        <Graph data={graphData} nodeClick={nodeClicked} nodeClickFunction={setNodeClicked}/>
         <AddThoughtForm submitHandler={ submitFunction } onChangeHandler={ handleChange } inputValue={newthought} />
       </div>
     </div>

@@ -3,6 +3,8 @@ body{
     background-color: black;
     color: white;
     /* overflow: hidden; */
+    font-family: 'Quicksand', sans-serif;
+
 
 }
 
@@ -14,7 +16,7 @@ body{
 }
 
 #component-list{
-    width: 20vw;
+    width: 30vw;
     overflow: scroll;
     background-color: rgba(241, 241, 241, 0.5);
     color: #fff;
@@ -26,9 +28,7 @@ body{
     right: 0;
     margin-top:6.5vw;
     margin-right:2vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    padding-bottom: 2vw;
+    padding: 2vw;
 
     font-family: 'Quicksand', sans-serif;
 
@@ -48,10 +48,14 @@ body{
 #component-addthoughtform {
     position: absolute;
     top: 0;
-    padding-top: 1vw;
+    padding-top: 2vw;
     left: 0;
-    padding-left: 1vw;
+    align-items: center;
+    /* padding-left: 1vw; */
+    margin-left: 3vw;
+    margin-top: 3vw;
     width: 30vw;
+
 }
 
 

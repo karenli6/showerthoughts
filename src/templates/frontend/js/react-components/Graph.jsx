@@ -5,48 +5,11 @@ import List from './List';
 
 // note: original strings stored in node.original_thoughts
 function Graph(props) {
-    /// app
 
-    // var app = {
-
-    //     chars: ['this is my shower thought.','cats and dogs','9'],
-    
-    //     init: function () {
-    //       app.container = document.createElement('div');
-    //       app.container.className = 'animation-container';
-    //       document.body.appendChild(app.container);
-    //       window.setInterval(app.add, 400);
-    //     },
-    
-    //     add: function () {
-    //       var element = document.createElement('span');
-    //       app.container.appendChild(element);
-    //       app.animate(element);
-    //     },
-    
-    //     animate: function (element) {
-    //       var character = app.chars[Math.floor(Math.random() * app.chars.length)];
-    //       var duration = Math.floor(Math.random() * 15) + 1;
-    //       var offset = Math.floor(Math.random() * (50 - duration * 2)) + 3;
-    //       var size = 10 + (15 - duration);
-    //       element.style.cssText = 'right:'+offset+'vw; font-size:'+size+'px;animation-duration:'+duration+'s';
-    //       element.innerHTML = character;
-    //       window.setTimeout(app.remove, duration * 1000, element);
-    //     },
-    
-    //     remove: function (element) {
-    //       element.parentNode.removeChild(element);
-    //     },
-    
-    //   };
-    
-
-    ///
     const fgRef = useRef(1);
 
     const [thoughtList, setThoughtList] = useState([]);
     const [nodeLabel, setNodeLabel] = useState("");
-    const [nodeClicked, setNodeClicked] = useState(false);
 
     // node focus zoom-in mode
     const handleClick = useCallback(node => {
@@ -65,25 +28,11 @@ function Graph(props) {
         // app.init;
         setThoughtList(node.original_thoughts)
         setNodeLabel(node.id)
-        setNodeClicked(true)
+        props.nodeClickFunction(true)
 
     }, [fgRef]);
 
-    // const handleKeyDown = (event) => {
-    //     console.log('A key was pressed', thoughtList);
-    //   };
     
-    //   useEffect(() => {
-    //     console.log("clicked: checking thought list: ", thoughtList)
-    //     window.addEventListener('keydown', handleKeyDown);
-    
-    //     // cleanup this component
-    //     return () => {
-    //       window.removeEventListener('keydown', handleKeyDown);
-    //     };
-    //   }, []);
-    
-
     // highlighting links
     const thisGraph = props.data.graph
     const graphLinks = thisGraph.links
@@ -137,7 +86,7 @@ function Graph(props) {
                 linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
             />
 
-            {nodeClicked > 0 &&
+            {props.nodeClick > 0 &&
              <div id="component-list">
                 <List givenList={thoughtList} name={nodeLabel} />
             </div>

@@ -5,7 +5,7 @@ from .color_generator import get_color_array
 
 ## converts graph object to
 def graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS, highlight_thought):
-  # print('sizes:', SIZES)
+  print('incoming thought:', highlight_thought)
 
   neo4j_obj = {
     "nodes": [], 
@@ -54,7 +54,7 @@ def graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS, highlight_thought):
     bfs(color_label, GRAPH, root)
     color_label +=1
   
-  ## get associated colors
+  ## generate random colors
   color_array = get_color_array(len(ROOTS))
   total_package = {
     "graph": neo4j_obj, 

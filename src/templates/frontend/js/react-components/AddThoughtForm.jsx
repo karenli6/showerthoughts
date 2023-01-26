@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Collpase from 'react-bootstrap/Collapse';
-// import Stack from 'react-bootstrap/Stack';
 
 const darkColorHex = '#333333';
 const darkColorOpacity = '0.8';
