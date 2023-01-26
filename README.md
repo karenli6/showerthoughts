@@ -50,7 +50,8 @@ other:
 
 # Write-ups
 Project proposal: [LINK](https://docs.google.com/document/d/1z_XaB_Nkq3_TmX9vxULkrqsZ2MO20u3tCEZ2iM6lBpg/edit?usp=sharing)
-Info slide deck: 
+
+[EXPERIENCE SLIDE DECK](https://docs.google.com/presentation/d/1HmZknS4jfn35WOqGNYX-ldS-8UVmkdRKk4jn3AK8v80/edit?usp=sharing)
 
 # Credits
 Direct contributors: @trifork3, @karenli6

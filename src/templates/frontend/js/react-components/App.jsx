@@ -8,7 +8,7 @@ var serverhost = 'http://127.0.0.1:5000';
 
 function App() {
   const [graphData, setGraphData] = useState(testdata);
-  console.log("TYPE-----", typeof testdata)
+
   // form functionalities
   let [newthought, setNewthought] = useState("");
 
@@ -18,7 +18,7 @@ function App() {
     var url_req = serverhost + '/process';
     console.log("sending to this API: ", url_req)
 
-    // fetch API
+    // API call
     fetch(url_req, {
       method: 'POST',
       headers: {
@@ -28,23 +28,20 @@ function App() {
     }).then(function (response) {
       return response.text();
     }).then(function (text) {
-      console.log('POST response: ');
-      // Should be 'OK' if everything was good
-      setGraphData(JSON.parse(text))
+      console.log('POST response received');
+      let colors_and_graph = JSON.parse(text)
+      // update state of graph data
+      setGraphData(colors_and_graph)
 
     });
   }
 
+  // form input function
   let handleChange = (e) => {
     let name = e.target.value;
-    console.log(name)
-
     setNewthought(name);
   }
 
-
-  // pass in submission function
-  // parse through
   return (
     <div id="component-app">
       <div id="component-app-title">
