@@ -186,6 +186,8 @@ def get_mapped_data(history_list):
 def create_graph(incoming_data):
   print("-- IN PROCESS: starting to create graph")
   history = get_shower_data()
+  print("history is: ", history)
+  print("------")
   assert incoming_data in history
   # DATA TO RETURN
   GRAPH = {}

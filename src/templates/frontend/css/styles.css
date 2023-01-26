@@ -21,14 +21,17 @@ body{
     background-color: rgba(241, 241, 241, 0.5);
     color: #fff;
     
-    height: 30vw;
+    height: 40vw;
     border-radius:8px;
     position:absolute; 
     top: 0;
     right: 0;
     margin-top:6.5vw;
     margin-right:2vw;
-    padding: 2vw;
+    padding-right: 1.5vw;
+    padding-left: 1.5vw;
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
 
     font-family: 'Quicksand', sans-serif;
 
@@ -58,11 +61,14 @@ body{
 
 }
 
-
+#inlineList{
+    list-style-type: "» ";
+    /* color:red; */
+}
 
 /* separate */
 
-#animation-container {
+/* #animation-container {
     position: absolute;
     top: 25vh;
     left: 0;
@@ -108,4 +114,4 @@ body{
       opacity: 0;
       transform: none;
     }
-  }
+  } */
