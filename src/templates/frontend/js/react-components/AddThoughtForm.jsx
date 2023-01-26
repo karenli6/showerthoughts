@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Collpase from 'react-bootstrap/Collapse';
-// import Stack from 'react-bootstrap/Stack';
 
 const darkColorHex = '#333333';
 const darkColorOpacity = '0.8';
@@ -21,12 +20,12 @@ function AddThoughtForm(props) {
     const formElement = (
         <Form onSubmit={ props.submitHandler }>
             <Form.Group className="mb-3">
-                <Form.Control type="text" id="user_input" name="user_input" onChange={ props.onChangeHandler } />
+                <Form.Control type="text" id="user_input" name="user_input" onChange={ props.onChangeHandler } value={props.inputValue}/>
                 <Form.Text style={{ color: lightColorHex }}>
                     Add your thought to the collection here
                 </Form.Text>
             </Form.Group>
-            <Button variant="dark" type="Submit" onClick={ () => setFormVisible(true) } >
+            <Button variant="dark" type="Submit" onClick={ () => setFormVisible(false) } >
                 Submit
             </Button>
         </Form>

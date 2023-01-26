@@ -1,15 +1,15 @@
 import React from 'react';
-import { useRef, useCallback, useState } from 'react';
+import { useRef, useCallback, useState , useEffect} from 'react';
 import ForceGraph3D from 'react-force-graph-3d';
 import List from './List';
 
 // note: original strings stored in node.original_thoughts
 function Graph(props) {
+
     const fgRef = useRef(1);
 
     const [thoughtList, setThoughtList] = useState([]);
     const [nodeLabel, setNodeLabel] = useState("");
-    const [nodeClicked, setNodeClicked] = useState(false);
 
     // node focus zoom-in mode
     const handleClick = useCallback(node => {
@@ -24,12 +24,15 @@ function Graph(props) {
         );
 
         // update state
+        console.log("handle click: ", node.original_thoughts)
+        // app.init;
         setThoughtList(node.original_thoughts)
         setNodeLabel(node.id)
-        setNodeClicked(true)
+        props.nodeClickFunction(true)
 
     }, [fgRef]);
 
+    
     // highlighting links
     const thisGraph = props.data.graph
     const graphLinks = thisGraph.links
@@ -83,7 +86,7 @@ function Graph(props) {
                 linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
             />
 
-            {nodeClicked > 0 &&
+            {props.nodeClick > 0 &&
              <div id="component-list">
                 <List givenList={thoughtList} name={nodeLabel} />
             </div>
