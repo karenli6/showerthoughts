@@ -18,3 +18,37 @@ body {
     padding-left: 1vw;
     width: 30vw;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Quicksand&display=swap');
+body{
+    background-color: black;
+    color: white;
+}
+
+#component-form {
+    border-style: solid;
+    border-width: 5px;
+    border-color: red;
+    width: fit-content;
+}
+
+#component-list{
+    width: 20vw;
+    overflow: scroll;
+    background-color: rgba(241, 241, 241, 0.5);
+    color: #fff;
+    
+    height: 30vw;
+    border-radius:8px;
+    position:absolute; 
+    top: 0;
+    margin-top:6.5vw;
+    margin-left:2vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-bottom: 2vw;
+
+    font-family: 'Quicksand', sans-serif;
+    left: 0;
+
+}
