@@ -115,7 +115,8 @@ def clean_text(text):
 # Perform kmeans clustering on list of phrases
 
 # phrase_list dictionary: (key = phrase list item), (value = original shower thought string)
-def generate_clusters(num_clusters, 
+def generate_clusters(
+  num_clusters, 
   phrase_list, 
   phrase_list_dictionary, 
   this_SIZES, 
@@ -142,16 +143,18 @@ def generate_clusters(num_clusters,
     phrase_list_item = phrase_list[sentence_id]
     clustered_sentences[cluster_id].append(phrase_list_item)
     # store original string too
-    original_thoughts[cluster_id].append(phrase_list_dictionary[phrase_list_item])
+    original_string = phrase_list_dictionary[phrase_list_item]
+    original_thoughts[cluster_id].append(original_string)
 
   # thoughts_list: maps (key = topic) to (value = list) of raw shower thoughts associated with this topic
   # i is the corresponding index, used for both original_thoughts and clustered_sentences
   for i, cluster in enumerate(clustered_sentences):
     # cluster = list of words
     # find_topics: given list of words, finds overarching topic
-    raw_shower_thoughts_list = original_thoughts[i]
+    raw_shower_thoughts_list=[k for k in original_thoughts[i] if k]
+    # raw_shower_thoughts_list = original_thoughts[i]
     topic = find_topics(cluster)[0]
-    cluster = [i for i in cluster if i]
+    cluster = [j for j in cluster if j]
     clusters[topic] = cluster
     # ensure that the length of cluster reflects the list of original thoughts
     assert len(cluster) == len(raw_shower_thoughts_list)
@@ -180,10 +183,10 @@ def get_mapped_data(history_list):
   return cleaned_list, mapper
 
 ###### ultimate function to create clustered graph: 
-def create_graph():
+def create_graph(incoming_data):
   print("-- IN PROCESS: starting to create graph")
   history = get_shower_data()
-
+  assert incoming_data in history
   # DATA TO RETURN
   GRAPH = {}
   SIZES = {}

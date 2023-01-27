@@ -1,28 +1,11 @@
-body {
-    background-color: black;
-}
-
-#component-app-title h1 {
-    color: white;
-}
-
-#component-app-elements {
-    position: relative;
-}
-
-#component-addthoughtform {
-    position: absolute;
-    top: 0;
-    padding-top: 1vw;
-    left: 0;
-    padding-left: 1vw;
-    width: 30vw;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Quicksand&display=swap');
 body{
     background-color: black;
     color: white;
+    /* overflow: hidden; */
+    font-family: 'Quicksand', sans-serif;
+
+
 }
 
 #component-form {
@@ -33,7 +16,7 @@ body{
 }
 
 #component-list{
-    width: 20vw;
+    width: 30vw;
     overflow: scroll;
     background-color: rgba(241, 241, 241, 0.5);
     color: #fff;
@@ -42,13 +25,87 @@ body{
     border-radius:8px;
     position:absolute; 
     top: 0;
+    right: 0;
     margin-top:6.5vw;
-    margin-left:2vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    padding-bottom: 2vw;
+    margin-right:2vw;
+    padding: 2vw;
 
     font-family: 'Quicksand', sans-serif;
-    left: 0;
+
 
 }
+
+#component-app-title h1 {
+    font-family: 'Quicksand', sans-serif;
+
+    color: white;
+}
+
+#component-app-elements {
+    position: relative;
+}
+
+#component-addthoughtform {
+    position: absolute;
+    top: 0;
+    padding-top: 2vw;
+    left: 0;
+    align-items: center;
+    /* padding-left: 1vw; */
+    margin-left: 3vw;
+    margin-top: 3vw;
+    width: 30vw;
+
+}
+
+
+
+/* separate */
+
+#animation-container {
+    position: absolute;
+    top: 25vh;
+    left: 0;
+    right: 0;
+    bottom: 25vh;
+    z-index: 1;
+    background: #111111;
+  }
+  
+  #animation-container span {
+    position: absolute;
+    color: whitesmoke;
+    display: block;
+    font-size: 18px;
+    font-family: 'Helvetica';
+    text-shadow: 0 0 1px white;
+    user-select: none;
+    pointer-events: none;
+    cursor: default;
+    z-index: 10;
+    opacity: 0;
+    top: 0;
+    will-change: transform, opacity;
+    animation-timing-function: ease-out;
+    animation-name: move;
+  }
+  
+@keyframes move {
+    0% {
+      opacity: 0;
+      top: 100%;
+    }
+    25% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+      transform: none;
+    }
+  }

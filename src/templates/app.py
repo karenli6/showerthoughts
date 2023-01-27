@@ -30,7 +30,7 @@ def process():
         f_object.close()
 
     # trigger text processing
-    GRAPH, SIZES, ROOTS, THOUGHTS_LIST = create_graph()
+    GRAPH, SIZES, ROOTS, THOUGHTS_LIST = create_graph(incoming_thought[0])
 
     json_obj = graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS_LIST, incoming_thought[0])
 
