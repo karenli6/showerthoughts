@@ -38,6 +38,8 @@ other:
 
 ## Ideas
 
+- (suggested by Peggy) add control to allow user to control "strength" of partitioning? is there a way to have the NLP make it "easier" or "harder" to group/draw connections between thoughts? adds to the "things in between" idea of the exhibit and also the physical outside of the showerthoughts room
+
 - create separate page for input form? maybe have the graph zoom waayyy out and then show the form on a separate space-y page either on
     command or after a set period of time; the zoom goes back in when the form is submitted and a new thought is added to the graph
 - add `onHover` on cluster to fit-to-screen (basically zoom into the group of nodes); to keep this action separate from the node labelling,
@@ -54,7 +56,7 @@ Project proposal: [LINK](https://docs.google.com/document/d/1z_XaB_Nkq3_TmX9vxUL
 [Music credits](https://www.youtube.com/watch?v=TfMc1JEthzc)
 
 # Credits
-Direct contributors: @crifork3, @karenli6
+Direct contributors: @trifork3, @karenli6
 References, resources, and inspiration: @cynthia9chen, (project) [lotus](https://github.com/karenli6/lotus)
 https://github.com/vasturiano/react-force-graph
 
