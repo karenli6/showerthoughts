@@ -3,6 +3,9 @@ import { useRef, useCallback, useState , useEffect} from 'react';
 import ForceGraph3D from 'react-force-graph-3d';
 import List from './List';
 
+const doubleClickTimeout_ms = 200;
+const doubleClickZoom_ms = 2000;
+
 // note: original strings stored in node.original_thoughts
 function Graph(props) {
 
@@ -32,6 +35,24 @@ function Graph(props) {
 
     }, [fgRef]);
 
+    // add control to zoom out to default view on double-click
+    const clickTimer = useRef(null);
+    const handleBackgroundClick = (e) => {
+        if (clickTimer.current == null) {
+            //console.log("setting double click");
+            clickTimer.current = setTimeout(function() {
+                clickTimer.current = null;
+                //console.log("double click timed out");
+            }, doubleClickTimeout_ms);
+        }
+        // double click was successful, so zoom out
+        else {
+            //console.log("double click");
+            fgRef.current.zoomToFit(doubleClickZoom_ms);
+            clearTimeout(clickTimer.current);
+            clickTimer.current = null;
+        }
+    };
     
     // highlighting links
     const thisGraph = props.data.graph
@@ -155,6 +176,7 @@ function Graph(props) {
                 linkWidth={link => highlightLinks.has(link) ? 5 : 1}
                 linkDirectionalParticles={4}
                 linkDirectionalParticleWidth={link => highlightLinks.has(link) ? 4 : 0}
+                onBackgroundClick={ handleBackgroundClick }
             />
 
             {/* {props.nodeClick > 0 &&
