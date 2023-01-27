@@ -91,6 +91,77 @@ function Graph(props) {
         
     }
 
+    // text animations
+    const initAnimations = () => {
+        let appContainer;
+        let index= 0;
+        /// functions
+        const addElement = () => {
+            var element = document.createElement('span');
+            element.className='component-span';
+            appContainer.appendChild(element);
+            animateElement(element);
+        }
+        const removeElement = (element) => {
+            element.parentNode.removeChild(element);
+       
+        }
+        //////
+        const animateElement = (element) => {
+            if (index == thoughtList.length){
+                // terminate animations
+                // clearInterval(addElement);
+                console.log("visualized all");
+                // props.nodeClickFunction(false)
+                document.body.removeChild(appContainer);
+    
+            } else{
+                var character = '('+nodeLabel+'): "'+thoughtList[index]+'"';
+                var duration = Math.floor(Math.random() * 15) + 10;
+                var offset = Math.floor(Math.random() * (50 - duration * 2)) + 3;
+                var size = 10 + (15 - (Math.floor(Math.random() * 15) + 1));
+                element.style.cssText = 'right:'+offset+'vw; font-size:'+size+'px;animation-duration:'+duration+'s';
+                element.innerHTML = character;
+                window.setTimeout(removeElement, duration * 900, element);
+                index +=1;
+            }
+           
+    
+    
+          
+        }
+        
+        // create container element
+        appContainer=document.createElement('div');
+        // set appropriate ID
+        appContainer.className = 'component-list';
+        // add to body
+        document.body.appendChild(appContainer);
+        window.setInterval(addElement, 3000);
+    }
+
+    /// trigger text animation
+
+    const upHandler = ({ key }) => {
+        console.log("key pressed", key)
+    };
+    // Add event listeners
+    useEffect(() => {
+        // window.addEventListener("keydown", downHandler);
+        window.addEventListener("keyup", upHandler);
+        // Remove event listeners on cleanup
+        console.log("SUCCESSFULLY STARTING INIT: ")
+   
+        initAnimations();
+    
+        return () => {
+        // window.removeEventListener("keydown", downHandler);
+        window.removeEventListener("keyup", upHandler);
+        // document.body.removeChild(appContainer);
+
+        };
+    }, [thoughtList]); 
+
     return (
 
         <div id="component-graph">
@@ -108,11 +179,11 @@ function Graph(props) {
                 onBackgroundClick={ handleBackgroundClick }
             />
 
-            {props.nodeClick > 0 &&
+            {/* {props.nodeClick > 0 &&
              <div id="component-list">
                 <List givenList={thoughtList} name={nodeLabel} />
             </div>
-            }
+            } */}
 
             
         </div>

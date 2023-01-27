@@ -186,6 +186,8 @@ def get_mapped_data(history_list):
 def create_graph(incoming_data):
   print("-- IN PROCESS: starting to create graph")
   history = get_shower_data()
+  print("history is: ", history)
+  print("------")
   assert incoming_data in history
   # DATA TO RETURN
   GRAPH = {}
@@ -198,7 +200,7 @@ def create_graph(incoming_data):
   history, mapped_history = get_mapped_data(history)
   
   # initial clusters
-  roots, SIZES, THOUGHTS_LIST = generate_clusters(5, history, mapped_history, SIZES,THOUGHTS_LIST)
+  roots, SIZES, THOUGHTS_LIST = generate_clusters(10, history, mapped_history, SIZES,THOUGHTS_LIST)
   root_children = {}
 
   # do BFS to generate child clusters and create tree graph of parent-child edges

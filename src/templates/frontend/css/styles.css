@@ -15,20 +15,24 @@ body{
     width: fit-content;
 }
 
-#component-list{
-    width: 30vw;
+.component-list{
+    width: 60vw;
+    /* width: 100%; */
     overflow: scroll;
-    background-color: rgba(241, 241, 241, 0.5);
+    /* background-color: rgba(241, 241, 241, 0.5); */
     color: #fff;
     
-    height: 30vw;
+    height: 40vw;
     border-radius:8px;
     position:absolute; 
     top: 0;
     right: 0;
     margin-top:6.5vw;
     margin-right:2vw;
-    padding: 2vw;
+    padding-right: 1.5vw;
+    padding-left: 1.5vw;
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
 
     font-family: 'Quicksand', sans-serif;
 
@@ -58,54 +62,47 @@ body{
 
 }
 
+#inlineList{
+    list-style-type: "» ";
+    /* color:red; */
+}
 
+.component-span {
+  position: absolute;
+  /* color:red; */
+  color: whitesmoke;
+  display: block;
+  font-size: 18px;
+  /* font-family: 'Helvetica'; */
+  text-shadow: 0 0 1px whitesmoke;
+  user-select: none;
+  pointer-events: none;
+  cursor: default;
+  z-index: 1;
+  opacity: 0;
+  top: 0;
+  will-change: transform, opacity;
+  animation-timing-function: ease-out;
+  animation-name: move;
+}
 
-/* separate */
-
-#animation-container {
-    position: absolute;
-    top: 25vh;
-    left: 0;
-    right: 0;
-    bottom: 25vh;
-    z-index: 1;
-    background: #111111;
-  }
-  
-  #animation-container span {
-    position: absolute;
-    color: whitesmoke;
-    display: block;
-    font-size: 18px;
-    font-family: 'Helvetica';
-    text-shadow: 0 0 1px white;
-    user-select: none;
-    pointer-events: none;
-    cursor: default;
-    z-index: 10;
-    opacity: 0;
-    top: 0;
-    will-change: transform, opacity;
-    animation-timing-function: ease-out;
-    animation-name: move;
-  }
-  
 @keyframes move {
-    0% {
-      opacity: 0;
-      top: 100%;
-    }
-    25% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 1;
-    }
-    75% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 0;
-      transform: none;
-    }
+  0% {
+    opacity: 0;
+    top: 100%;
   }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
