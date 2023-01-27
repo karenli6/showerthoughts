@@ -200,7 +200,7 @@ def create_graph(incoming_data):
   history, mapped_history = get_mapped_data(history)
   
   # initial clusters
-  roots, SIZES, THOUGHTS_LIST = generate_clusters(5, history, mapped_history, SIZES,THOUGHTS_LIST)
+  roots, SIZES, THOUGHTS_LIST = generate_clusters(10, history, mapped_history, SIZES,THOUGHTS_LIST)
   root_children = {}
 
   # do BFS to generate child clusters and create tree graph of parent-child edges
