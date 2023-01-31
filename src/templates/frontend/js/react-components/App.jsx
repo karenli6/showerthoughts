@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
-
 import Graph from './Graph';
 import AddThoughtForm from './AddThoughtForm';
-
 import * as testdata from '../../../backend/js_graph.json';
+
+// NOTE: production mode
 var serverhost = 'http://127.0.0.1:5000';
 
 function App() {
+
+  // states used for graph
   const [graphData, setGraphData] = useState(testdata);
   const [nodeClicked, setNodeClicked] = useState(false);
 
@@ -49,9 +51,6 @@ function App() {
 
   return (
     <div id="component-app">
-      {/* <div id="component-app-title">
-        <h1>[ #showerthoughts ]</h1>
-      </div> */}
       <div id="component-app-elements">
         <Graph data={graphData} nodeClick={nodeClicked} nodeClickFunction={setNodeClicked}/>
         <AddThoughtForm submitHandler={ submitFunction } onChangeHandler={ handleChange } inputValue={newthought} />
@@ -59,16 +58,5 @@ function App() {
     </div>
   );
 }
-
-/*
-<div id="component-form">
-    <h1>TESTING: click to submit shower thought </h1>
-    <form onSubmit={submitFunction}>
-        <label for="user_input">Type in your shower thought:</label>
-        <input type="text" id="user_input" name="user_input" onChange={handleChange} />
-        <input type="submit" value="Click me" />
-    </form>
-</div>
-*/
 
 export default App;

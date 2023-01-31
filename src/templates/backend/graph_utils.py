@@ -17,7 +17,6 @@ os.environ['KMP_DUPLICATE_LIB_OK']='True'
 from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
 
-
 # imports for NLP
 from .config import NLTK_DATA_DIR
 import nltk
@@ -33,7 +32,8 @@ import string
 import re
 import itertools
 from collections import Counter
-
+import matplotlib.pyplot as plt
+import random
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation as LDA
@@ -111,9 +111,25 @@ def clean_text(text):
     text_no_doublespace = re.sub('\s+', ' ', text_nopunct).strip()
     return text_no_doublespace
 
+#######################################################
+## DATA ANALYSIS FUNCTIONS
+
+## maps each element in history with the original shower thought string
+def get_mapped_data(history_list):
+  # list of cleaned text inputs
+  cleaned_list = []
+  # maps cleaned text input to original string
+  mapper = {}
+
+  for cleaned_text, original_string in history_list: 
+    new_item = clean_text(cleaned_text)
+    cleaned_list.append(new_item)
+    mapper[new_item] = original_string
+  
+  return cleaned_list, mapper
+
 #############
 # Perform kmeans clustering on list of phrases
-
 # phrase_list dictionary: (key = phrase list item), (value = original shower thought string)
 def generate_clusters(
   num_clusters, 
@@ -164,25 +180,9 @@ def generate_clusters(
 
   return clusters, this_SIZES, this_THOUGHTS_LIST
 
+#################################################
+## GRAPH  GENERATION
 
-#######################################################
-## DATA ANALYSIS + CLUSTER GENERATION
-
-## maps each element in history with the original shower thought string
-def get_mapped_data(history_list):
-  # list of cleaned text inputs
-  cleaned_list = []
-  # maps cleaned text input to original string
-  mapper = {}
-
-  for cleaned_text, original_string in history_list: 
-    new_item = clean_text(cleaned_text)
-    cleaned_list.append(new_item)
-    mapper[new_item] = original_string
-  
-  return cleaned_list, mapper
-
-###### ultimate function to create clustered graph: 
 def create_graph(incoming_data):
   print("-- IN PROCESS: starting to create graph")
   history = get_shower_data()
@@ -261,41 +261,25 @@ def create_graph(incoming_data):
   # outside of queue    
   print("root_children", root_children)
 
-  # # identify the topic with the maximum number of child topics
-  # max_child_topic = max(root_children, key = root_children.get)
-  # print(max_child_topic)
-
-  # # standardize sizes
-  # factor = 700/sum(SIZES.values())
-
-  # # MISCELLANEOUS
-  # for k in GRAPH.keys():
-  #   GRAPH[k] = list(GRAPH[k])
-  #   SIZES[k] = factor * SIZES[k]
-
-
-  # for child in GRAPH[max_child_topic]:
-  #   for i in range(len(GRAPH[child])):
-  #     if GRAPH[child][i] == max_child_topic:
-  #         GRAPH[child][i] = 'Miscellaneous'
-
   root_topics = list(roots.keys())
-  
-  # # change root topic label
-  # for i in range(len(root_topics)):
-  #   if root_topics[i] == max_child_topic:
-  #     root_topics[i] = 'Miscellaneous'
-
-  # # reset graph, thoughts_list, and sizes label
-  # GRAPH['Miscellaneous'] = GRAPH[max_child_topic]
-  # del GRAPH[max_child_topic]
-  # SIZES['Miscellaneous'] = SIZES[max_child_topic]
-  # del SIZES[max_child_topic]
-  # THOUGHTS_LIST['Miscellaneous'] = THOUGHTS_LIST[max_child_topic]
-  # del THOUGHTS_LIST[max_child_topic]
 
   print('graph:', GRAPH)
   print("----------")
   print("-----------")
   print("thoughts list:", THOUGHTS_LIST)
   return GRAPH, SIZES, root_topics, THOUGHTS_LIST
+
+#################################################
+# random color generator (AVOID colors that are similar to white)
+def get_color_array(num_colors):
+  # highlighted color: #f2f2f2
+  prohibited_colors = ["#EDEADE","#f2f2f2", "#F5F5DC", "#F9F6EE", "#FFF8DC", "#FFFDD0", "#F0EAD6", "#FFFFF0", "	#E9DCC9", "#FAF9F6", "#FCF5E5","#FFE5B4", "#FFFFFF","#F3E5AB", "#FFF5EE" ]
+  i = 0
+  color = []
+  while (i < num_colors):
+    newcolor = "#"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])
+    if newcolor not in prohibited_colors :
+      color.append(newcolor)
+      i+=1
+
+  return color

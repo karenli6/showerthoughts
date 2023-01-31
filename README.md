@@ -3,54 +3,32 @@
 
 Shower thoughts: a sudden idea that occurs to a person during an unconnected mundane activity.  a.k.a. the most interesting expressions of our creativity and randomness.
 
-The inclusion of gesture controls is intended to make the audience’s interaction with others’ thoughts more concrete. Being able to affect the display of concepts with bodily gestures helps bridge the gap between the mental and the physical.
+Our interactive user experience includes gesture controls. This user experience addition is intended to make the audience’s interaction with others’ thoughts more concrete. Being able to affect the display of concepts with bodily gestures helps bridge the gap between the mental and the physical.
 
+# The Artistic Experience
 
 # Developer guide: 
 ## Directory and File Structure: 
 NOTE: 
+- 'src' is the folder containing final code files. 
 - 'dev' is the folder for temporary code/notes that aren't part of the final product.
-- 'src' is the folder containing final code files.
-- CURRENTLY: ONLY WORKING WITHIN SRC. 
 
 ## How to set up and run the app & backend
 1. Set up Python virtual environment. Enter your python virtual environment and install all dependencies (`pip install -r requirements.txt`).
-2. JAVASCRIPT: enter the `src` directory --> 'cd templates' --> 'cd frontend' --> run `npm i` to install needed nodejs modules
+2. Set up dependencies for node.js. Enter the `src` directory --> 'cd templates' --> 'cd frontend' --> run `npm i` to install required modules.
 
 
 After dependencies are added, the app can be run anytime via the following:
 1. Open 2 terminals. 
 2. First, in one terminal, run the react frontend: 'cd templates' --> 'cd frontend' --> 'npm run watch'
-3. next, in the SECOND terminal, start the backend: run flask backend in one terminal: 'cd src' -> 'cd templates' --> 'python3 -B app.py'
-4. open a browser and go to [localhost:5000](https://127.0.0.1:5000)
+3. Next, in the SECOND terminal, start the backend: run flask backend in one terminal: 'cd src' -> 'cd templates' --> 'python3 -B app.py'
+4. Open a browser and go to [localhost:5000](https://127.0.0.1:5000)
 
-## TODO
-
-- hardware setup
-- informational slide show
-- text animation
-- node label
-- cleanup codebase (in progress)
-
-other:
-
-- software licensing? NPM package is currently "ISC" (npm default)
-
-## Ideas
+## Next Ideas (WIP)
 
 - (suggested by Peggy) add control to allow user to control "strength" of partitioning? is there a way to have the NLP make it "easier" or "harder" to group/draw connections between thoughts? adds to the "things in between" idea of the exhibit and also the physical outside of the showerthoughts room
 
-- create separate page for input form? maybe have the graph zoom waayyy out and then show the form on a separate space-y page either on
-    command or after a set period of time; the zoom goes back in when the form is submitted and a new thought is added to the graph
-- add `onHover` on cluster to fit-to-screen (basically zoom into the group of nodes); to keep this action separate from the node labelling,
-    maybe require a short period of time to stay hovering to activate group-zoom (ideally also have a lil timer graphic to indicate that the
-    action requires more `onHover` time to activate)
-- have help dialogs to explain what actions are available (one at a time) that fade in and fade out during periods of user inactivity
-
-
 # Write-ups
-Project proposal: [LINK](https://docs.google.com/document/d/1z_XaB_Nkq3_TmX9vxULkrqsZ2MO20u3tCEZ2iM6lBpg/edit?usp=sharing)
-
 [EXPERIENCE SLIDE DECK](https://docs.google.com/presentation/d/1HmZknS4jfn35WOqGNYX-ldS-8UVmkdRKk4jn3AK8v80/edit?usp=sharing)
 
 [Music credits](https://www.youtube.com/watch?v=TfMc1JEthzc)

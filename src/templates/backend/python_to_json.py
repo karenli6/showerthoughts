@@ -1,9 +1,9 @@
 # convert python graph to node object
 # note: adapted from lotus (project)
 import json
-from .color_generator import get_color_array
+from .graph_utils import get_color_array
 
-## converts graph object to
+## converts graph object to json object
 def graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS, highlight_thought):
   print('incoming thought:', highlight_thought)
 
@@ -15,6 +15,7 @@ def graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS, highlight_thought):
   visited = [] # List to keep track of visited nodes.
   queue = []   # Initialize a queue
 
+  #########
   def bfs(group, graph, node):
     if node not in visited:
 
@@ -47,23 +48,23 @@ def graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS, highlight_thought):
             # define link
             neo4j_obj["links"].append({"source": s, "target": child, "value": 10})
             queue.append(child)
-
+  #######
 
   color_label = 1
   for root in ROOTS:
     bfs(color_label, GRAPH, root)
     color_label +=1
   
-  ## generate random colors
+  # generate random colors
   color_array = get_color_array(len(ROOTS))
   total_package = {
     "graph": neo4j_obj, 
     "colors": color_array
   }
 
-  y = json.dumps(total_package)
+  json_package = json.dumps(total_package)
 
   with open("backend/js_graph.json", "w") as outfile:
-      outfile.write(y)
+      outfile.write(json_package)
   
-  return y
+  return json_package

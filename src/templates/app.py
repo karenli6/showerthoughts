@@ -1,15 +1,17 @@
+# imports
 from flask import Flask, jsonify, request, render_template, json
 import os
 import sys
 from csv import writer
-
 from backend.graph_utils import create_graph
 from backend.python_to_json import graph_to_js
 
+# initialize app
 app = Flask(    __name__,
                 static_folder='./public',
                 template_folder='./frontend')
 
+# load
 @app.route('/')
 def default():
   return render_template('index.html')
@@ -34,12 +36,15 @@ def process():
 
     json_obj = graph_to_js(GRAPH, SIZES, ROOTS, THOUGHTS_LIST, incoming_thought[0])
 
+    # define response object
     response = app.response_class(
         response=json_obj,
         status=200,
         mimetype='application/json'
     )
     return response
+
+
 
 if __name__ == "__main__":
   app.run(debug=True)

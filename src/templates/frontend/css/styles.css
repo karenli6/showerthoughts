@@ -17,9 +17,7 @@ body{
 
 .component-list{
     width: 60vw;
-    /* width: 100%; */
     overflow: scroll;
-    /* background-color: rgba(241, 241, 241, 0.5); */
     color: #fff;
     
     height: 40vw;
@@ -55,7 +53,6 @@ body{
     padding-top: 2vw;
     left: 0;
     align-items: center;
-    /* padding-left: 1vw; */
     margin-left: 3vw;
     margin-top: 3vw;
     width: 30vw;
@@ -64,16 +61,13 @@ body{
 
 #inlineList{
     list-style-type: "» ";
-    /* color:red; */
 }
 
 .component-span {
   position: absolute;
-  /* color:red; */
   color: whitesmoke;
   display: block;
   font-size: 18px;
-  /* font-family: 'Helvetica'; */
   text-shadow: 0 0 1px whitesmoke;
   user-select: none;
   pointer-events: none;

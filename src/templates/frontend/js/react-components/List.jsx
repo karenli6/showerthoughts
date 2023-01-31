@@ -1,6 +1,6 @@
-import React , {useEffect} from 'react';
+// NOTE: may not need this
+import React from 'react';
 
-// TODO: ideal text animation: https://codepen.io/g1eb/pen/MbrRry
 function List(props) {
 
   const stringList = props.givenList;
