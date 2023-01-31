@@ -5,7 +5,7 @@ Shower thoughts: a sudden idea that occurs to a person during an unconnected mun
 
 Our interactive user experience includes gesture controls. This user experience addition is intended to make the audience’s interaction with others’ thoughts more concrete. Being able to affect the display of concepts with bodily gestures helps bridge the gap between the mental and the physical.
 
-# The Artistic Experience
+# The Visual Experience
 <img width="1440" alt="sample" src="https://user-images.githubusercontent.com/49102723/215666642-735a5436-182b-43e6-a03f-7b3cf999e670.png">
 
 <img width="1440" alt="zoom" src="https://user-images.githubusercontent.com/49102723/215666654-f62de02f-a9c9-40c3-8278-881223b0733a.png">
