@@ -1,6 +1,3 @@
-# local versions of packages + repos
-dev/external/
-
 # local dev files
 node_modules/
 build/
