@@ -41,6 +41,7 @@ After dependencies are added, the app can be run anytime via the following:
 
 # Credits
 Direct contributors: @trifork3, @karenli6
+
 References, resources, and inspiration: @cynthia9chen, (project) [lotus](https://github.com/karenli6/lotus)
 https://github.com/vasturiano/react-force-graph
 
