@@ -35,6 +35,8 @@ After dependencies are added, the app can be run anytime via the following:
 - (suggested by Peggy) add control to allow user to control "strength" of partitioning? is there a way to have the NLP make it "easier" or "harder" to group/draw connections between thoughts? adds to the "things in between" idea of the exhibit and also the physical outside of the showerthoughts room
 
 # Write-ups
+[Harvard SEAS publication](https://seas.harvard.edu/news/2023/02/bridging-technology-and-art)
+
 [EXPERIENCE SLIDE DECK](https://docs.google.com/presentation/d/1HmZknS4jfn35WOqGNYX-ldS-8UVmkdRKk4jn3AK8v80/edit?usp=sharing)
 
 [Music credits](https://www.youtube.com/watch?v=TfMc1JEthzc)
